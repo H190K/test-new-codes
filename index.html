@@ -284,11 +284,11 @@
       transition: filter var(--transition-speed) ease;
     }
     
-    .project-card:hover img {
+    .-card:hover img {
       filter: grayscale(0%);
     }
     
-    .project-card h3 {
+    .-card h3 {
       font-size: 1.5rem;
       margin: 15px;
       opacity: 0;
@@ -296,7 +296,7 @@
       animation-delay: 1s;
     }
     
-    .project-card p {
+    .-card p {
       font-size: 0.9rem;
       margin: 0 15px 15px;
       color: var(--text-muted);
@@ -610,77 +610,17 @@
       </div>
     </section>
     
-    <!-- Projects Section -->
-    <section id="projects">
-      <div class="container">
-        <h2>My Projects</h2>
-        <div class="projects-grid">
-          <!-- Project 1: Alnssor Enterprise -->
-          <div class="project-card">
-            <a href="https://alnssorenterprise.co/" target="_blank">
-              <img src="alnssorenterprise.png" alt="Alnssor Enterprise Website" loading="lazy">
-            </a>
-            <h3>Alnssor Enterprise</h3>
-            <p>A comprehensive website for Alnssor Enterprise showcasing their services and products.</p>
-            <button class="btn-secondary" onclick="window.open('https://alnssorenterprise.co/', '_blank')">View Project</button>
-          </div>
-          <!-- Project 2: QR Generator -->
-          <div class="project-card">
-            <a href="https://qr.h190k.com" target="_blank">
-              <img src="qr.png" alt="QR Generator" loading="lazy">
-            </a>
-            <h3>QR Generator</h3>
-            <p>A dynamic QR code generator tool enabling users to create customized QR codes.</p>
-            <button class="btn-secondary" onclick="window.open('https://qr.h190k.com', '_blank')">View Project</button>
-          </div>
-          <!-- Project 3: Chat Starter -->
-          <div class="project-card">
-            <a href="https://wa.h190k.com" target="_blank">
-              <img src="wa.png" alt="Chat Starter" loading="lazy">
-            </a>
-            <h3>Chat Starter</h3>
-            <p>A tool to start chats with numbers without saving them on WhatsApp and Telegram.</p>
-            <button class="btn-secondary" onclick="window.open('https://wa.h190k.com', '_blank')">View Project</button>
-          </div>
-          <!-- Project 4: QR Generator Browser Extension -->
-          <div class="project-card">
-            <a href="https://github.com/H190K/qrcodegeneratorbrowserExtension" target="_blank">
-              <img src="qrextension.png" alt="QR Generator Browser Extension" loading="lazy">
-            </a>
-            <h3>QR Generator Browser Extension</h3>
-            <p>A Chrome-based extension for generating QR codes directly in your browser.</p>
-            <button class="btn-secondary" onclick="window.open('https://github.com/H190K/qrcodegeneratorbrowserExtension', '_blank')">Download Extension</button>
-          </div>
-          <!-- Project 5: Check IP with Geolocation -->
-          <div class="project-card">
-            <a href="https://checkip.h190k.com" target="_blank">
-              <img src="checkip.png" alt="Check IP with Geolocation" loading="lazy">
-            </a>
-            <h3>Check IP with Geolocation</h3>
-            <p>A simple tool to check your public IP address, location, and other geolocation details like country, city, and timezone.</p>
-            <button class="btn-secondary" onclick="window.open('https://checkip.h190k.com', '_blank')">View Project</button>
-          </div>
-          <!-- Project 6: IPCheck - Advanced IP Analysis -->
-          <div class="project-card">
-            <a href="https://ipcheck.h190k.com" target="_blank">
-              <img src="ipcheck.png" alt="IPCheck - Advanced IP Analysis" loading="lazy">
-            </a>
-            <h3>IPCheck - Advanced IP Analysis</h3>
-            <p>A tool to get a detailed breakdown of your IP, ISP, and network security insights. Features a different UI design compared to the previous project and deployed on Netlify.</p>
-            <button class="btn-secondary" onclick="window.open('https://ipcheck.h190k.com', '_blank')">View Project</button>
-          </div>
-<!-- Project Canvas for AttendList -->
- <div class="project-card">
-   <a href="https://attendlist.h190k.com" target="_blank">
-     <img src="attendlist.png" alt="AttendList - Streamlined Classroom Attendance" loading="lazy">
-   </a>
-   <h3>AttendList - Streamlined Classroom Attendance</h3>
-   <p>Automate attendance with instant QR codes or links; record timestamped check‑ins and export CSVs named DD-MM-YYYY_<CourseCode>.csv.</p>
-   <button class="btn-secondary" onclick="window.open('https://attendlist.h190k.com', '_blank')">View Project</button>
- </div>
-         </div>
-       </div>
-     </section>
+  
+   <!-- Projects Section -->
+<section id="projects">
+  <div class="container">
+    <h2>My Projects</h2>
+
+    <!-- Empty grid; JS will inject cards -->
+    <div class="projects-grid" id="projects-grid"></div>
+  </div>
+</section>
+
     
     <!-- Skills Section -->
     <section id="skills">
@@ -770,12 +710,7 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   
   <!-- Import Config -->
-  <script type="module">
-    import config from './config.js';
-    import turnstileConfig from './turnstile.js';
-    window.config = config;
-     window.turnstileConfig = turnstileConfig; 
-  </script>
+ <script type="module">
   
   <!-- JavaScript for Interactive Elements -->
   <script>
