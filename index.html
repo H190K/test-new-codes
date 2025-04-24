@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="H190K - Web Developer Portfolio of Hasan Albehadili showcasing projects, skills, and contact information.">
+  <title>H190K | Web Developer Portfolio</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="icon.png" type="image/png">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Social Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Lazy Load Library -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
+  
+  <style>
+    /* CSS Variables for easy theming */
+    :root {
+      --primary-bg: #0a0a0a;
+      --secondary-bg: #111;
+      --accent-color: #ff1493;
+      --hover-accent: #ff6347;
+      --btn-primary-bg: #8a2be2;
+      --btn-primary-hover: #4b0082;
+      --text-color: #fff;
+      --text-muted: #ccc;
+      --border-color: #333;
+      --transition-speed: 0.3s;
+      --animation-duration: 1s;
+    }
+    
+    /* Base Styles */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px 0;
+    }
+    
+    /* Navigation */
+    header {
+      position: fixed;
+      width: 100%;
+      background-color: rgba(10, 10, 10, 0.9);
+      padding: 20px 0;
+      z-index: 1000;
+      transition: background-color var(--transition-speed) ease;
+    }
+    
+    header.scrolled {
+      background-color: var(--primary-bg);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color var(--transition-speed) ease;
+    }
+    
+    .logo:hover {
+      color: var(--accent-color);
+    }
+    
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+    
+    .nav-links li {
+      margin-left: 30px;
+      position: relative;
+    }
+    
+    .nav-links a {
+      font-size: 1rem;
+      transition: color var(--transition-speed) ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--hover-accent);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background-color: var(--hover-accent);
+      transition: width var(--transition-speed);
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    /* Burger Menu */
+    .burger {
+      display: none;
+      cursor: pointer;
+    }
+    
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-color);
+      margin: 5px;
+      transition: all var(--transition-speed) ease;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: url('hero.png') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 0.5s;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1s;
+      color: #ddd;
+    }
+    
+    .btn-primary {
+      padding: 12px 35px;
+      background-color: var(--btn-primary-bg);
+      color: var(--text-color);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1.5s;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--btn-primary-hover);
+      transform: scale(1.05);
+    }
+    
+    /* Sections */
+    main section {
+      padding: 100px 0;
+    }
+    
+    main section:nth-of-type(even) {
+      background-color: var(--secondary-bg);
+    }
+    
+    /* About Section */
+    #about .about-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    
+    #about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 0.5s;
+    }
+    
+    #about p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1s;
+    }
+    
+    /* Projects Section */
+    #projects h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 50px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 0.5s;
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .project-card {
+      background-color: var(--primary-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--hover-accent);
+    }
+    
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: filter var(--transition-speed) ease;
+    }
+    
+    .project-card:hover img {
+      filter: grayscale(0%);
+    }
+    
+    .project-card h3 {
+      font-size: 1.5rem;
+      margin: 15px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1s;
+    }
+    
+    .project-card p {
+      font-size: 0.9rem;
+      margin: 0 15px 15px;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1.3s;
+    }
+    
+    .btn-secondary {
+      display: block;
+      width: 80%;
+      margin: 0 auto 15px;
+      padding: 10px 0;
+      background-color: var(--accent-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color var(--transition-speed) ease;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1.6s;
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--hover-accent);
+    }
+    
+    /* Skills Section */
+    #skills h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 50px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 0.5s;
+    }
+    
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .skill-card {
+      background-color: var(--primary-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--btn-primary-bg);
+      background-color: #1a1a1a;
+    }
+    
+    .skill-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    
+    .skill-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1s;
+    }
+    
+    .skill-card p {
+      font-size: 0.9rem;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1.3s;
+    }
+    
+    /* Contact Section */
+    #contact h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 50px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 0.5s;
+    }
+    
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    /* Hidden labels for accessibility */
+    .contact-form label {
+      display: none;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border: 2px solid var(--border-color);
+      border-radius: 5px;
+      background-color: var(--secondary-bg);
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: border-color var(--transition-speed) ease;
+    }
+    
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+    
+    .contact-form button {
+      padding: 15px;
+      background-color: var(--btn-primary-hover);
+      color: var(--text-color);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 1.5s;
+    }
+    
+    .contact-form button:hover {
+      background-color: var(--btn-primary-bg);
+      transform: scale(1.05);
+    }
+    
+    /* Donation Section */
+    #donation {
+      background-color: var(--secondary-bg);
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    #donation h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp var(--animation-duration) forwards;
+      animation-delay: 0.5s;
+    }
+    
+    #donation a img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      transition: transform var(--transition-speed) ease;
+    }
+    
+    #donation a img:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--primary-bg);
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .social-links a {
+      margin: 0 15px;
+      font-size: 1.5rem;
+      transition: color var(--transition-speed) ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent-color);
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        right: 0;
+        height: 100vh;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        padding-top: 100px;
+      }
+      
+      .nav-links.nav-active {
+        transform: translateX(0);
+      }
+      
+      .nav-links li {
+        margin: 20px 0;
+      }
+      
+      .burger {
+        display: block;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 0.9rem;
+      }
+      
+      .project-card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .project-card p {
+        font-size: 0.8rem;
+      }
+      
+      .skill-icon {
+        font-size: 2.5rem;
+      }
+      
+      .social-links a {
+        font-size: 1.3rem;
+        margin: 0 10px;
+      }
+      
+      #donation a img {
+        max-width: 200px;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .toggle .line1 {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .toggle .line2 {
+      opacity: 0;
+    }
+    
+    .toggle .line3 {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header id="navbar" role="banner">
+    <div class="container nav-container">
+      <a href="#hero" class="logo" aria-label="Home">H190K</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#donation">Donate</a></li>
+      </ul>
+      <div class="burger" role="button" tabindex="0" aria-label="Toggle Navigation">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <h1>Hi, I'm H190K</h1>
+        <p>Enthusiastic Web Developer dedicated to building visually striking and highly functional websites.</p>
+        <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });">View My Work</button>
+      </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <div class="about-content">
+          <h2>About Me</h2>
+          <p>My name is Hasan Albehadili, a software engineering student who loves to design websites. H190K is my slogan and brand, representing my commitment to creating seamless and engaging web experiences that make an impact.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="container">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+          <!-- Project 1: Alnssor Enterprise -->
+          <div class="project-card">
+            <a href="https://alnssorenterprise.co/" target="_blank">
+              <img src="alnssorenterprise.png" alt="Alnssor Enterprise Website" loading="lazy">
+            </a>
+            <h3>Alnssor Enterprise</h3>
+            <p>A comprehensive website for Alnssor Enterprise showcasing their services and products.</p>
+            <button class="btn-secondary" onclick="window.open('https://alnssorenterprise.co/', '_blank')">View Project</button>
+          </div>
+          <!-- Project 2: QR Generator -->
+          <div class="project-card">
+            <a href="https://qr.h190k.com" target="_blank">
+              <img src="qr.png" alt="QR Generator" loading="lazy">
+            </a>
+            <h3>QR Generator</h3>
+            <p>A dynamic QR code generator tool enabling users to create customized QR codes.</p>
+            <button class="btn-secondary" onclick="window.open('https://qr.h190k.com', '_blank')">View Project</button>
+          </div>
+          <!-- Project 3: Chat Starter -->
+          <div class="project-card">
+            <a href="https://wa.h190k.com" target="_blank">
+              <img src="wa.png" alt="Chat Starter" loading="lazy">
+            </a>
+            <h3>Chat Starter</h3>
+            <p>A tool to start chats with numbers without saving them on WhatsApp and Telegram.</p>
+            <button class="btn-secondary" onclick="window.open('https://wa.h190k.com', '_blank')">View Project</button>
+          </div>
+          <!-- Project 4: QR Generator Browser Extension -->
+          <div class="project-card">
+            <a href="https://github.com/H190K/qrcodegeneratorbrowserExtension" target="_blank">
+              <img src="qrextension.png" alt="QR Generator Browser Extension" loading="lazy">
+            </a>
+            <h3>QR Generator Browser Extension</h3>
+            <p>A Chrome-based extension for generating QR codes directly in your browser.</p>
+            <button class="btn-secondary" onclick="window.open('https://github.com/H190K/qrcodegeneratorbrowserExtension', '_blank')">Download Extension</button>
+          </div>
+          <!-- Project 5: Check IP with Geolocation -->
+          <div class="project-card">
+            <a href="https://checkip.h190k.com" target="_blank">
+              <img src="checkip.png" alt="Check IP with Geolocation" loading="lazy">
+            </a>
+            <h3>Check IP with Geolocation</h3>
+            <p>A simple tool to check your public IP address, location, and other geolocation details like country, city, and timezone.</p>
+            <button class="btn-secondary" onclick="window.open('https://checkip.h190k.com', '_blank')">View Project</button>
+          </div>
+          <!-- Project 6: IPCheck - Advanced IP Analysis -->
+          <div class="project-card">
+            <a href="https://ipcheck.h190k.com" target="_blank">
+              <img src="ipcheck.png" alt="IPCheck - Advanced IP Analysis" loading="lazy">
+            </a>
+            <h3>IPCheck - Advanced IP Analysis</h3>
+            <p>A tool to get a detailed breakdown of your IP, ISP, and network security insights. Features a different UI design compared to the previous project and deployed on Netlify.</p>
+            <button class="btn-secondary" onclick="window.open('https://ipcheck.h190k.com', '_blank')">View Project</button>
+          </div>
+<!-- Project Canvas for AttendList -->
+ <div class="project-card">
+   <a href="https://attendlist.h190k.com" target="_blank">
+     <img src="attendlist.png" alt="AttendList - Streamlined Classroom Attendance" loading="lazy">
+   </a>
+   <h3>AttendList - Streamlined Classroom Attendance</h3>
+   <p>Automate attendance with instant QR codes or links; record timestamped check‑ins and export CSVs named DD-MM-YYYY_<CourseCode>.csv.</p>
+   <button class="btn-secondary" onclick="window.open('https://attendlist.h190k.com', '_blank')">View Project</button>
+ </div>
+         </div>
+       </div>
+     </section>
+    
+    <!-- Skills Section -->
+    <section id="skills">
+      <div class="container">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+          <!-- Skill 1: Frontend Development -->
+          <div class="skill-card">
+            <div class="skill-icon"><i class="fas fa-code"></i></div>
+            <h3>Frontend Development</h3>
+            <p>HTML, CSS, JavaScript</p>
+          </div>
+          <!-- Skill 2: Backend Development -->
+          <div class="skill-card">
+            <div class="skill-icon"><i class="fas fa-database"></i></div>
+            <h3>Backend Development</h3>
+            <p>MongoDB, MySQL, Supabase</p>
+          </div>
+          <!-- Skill 3: Design -->
+          <div class="skill-card">
+            <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+            <h3>Design</h3>
+            <p>Adobe, Figma</p>
+          </div>
+          <!-- Skill 4: Cloud Services -->
+          <div class="skill-card">
+            <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+            <h3>Cloud Services</h3>
+            <p>Heroku, Render, Netlify</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2>Get In Touch</h2>
+        <div class="contact-form">
+          <form id="contact-form">
+            <input type="hidden" name="to_name" value="H190K">
+            <label for="from_name">Your Name</label>
+            <input type="text" id="from_name" name="from_name" placeholder="Your Name" required>
+            <label for="from_email">Your Email</label>
+            <input type="email" id="from_email" name="from_email" placeholder="Your Email" required>
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+            <p id="form-message" style="display: none;"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Donation Section -->
+    <section id="donation">
+      <div class="container">
+        <h2>Donate</h2>
+        <a href="https://nowpayments.io/donation?api_key=J0QACAH-BTH4F4F-QDXM4ZS-RCA58BH" target="_blank" rel="noreferrer noopener">
+          <img src="https://nowpayments.io/images/embeds/donation-button-black.svg" alt="Crypto donation button by NOWPayments" loading="lazy">
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 H190K. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://instagram.com/frh190k" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://x.com/h190k" target="_blank" aria-label="X (Twitter)">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="mailto:info@h190k.com" target="_blank" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  
+  <!-- Import Config -->
+  <script type="module">
+    import config from './config.js';
+    window.config = config;
+  </script>
+  
+  <!-- JavaScript for Interactive Elements -->
+  <script>
+    window.onload = function () {
+      // Initialize EmailJS after page load
+      if (window.config && window.config.emailjs) {
+        emailjs.init(window.config.emailjs.publicKey);
+        console.log("✅ EmailJS Initialized");
+      } else {
+        console.error("❌ EmailJS config is missing!");
+      }
+      
+      // Burger Menu Toggle
+      const burger = document.querySelector('.burger');
+      const navLinks = document.querySelector('.nav-links');
+      const navLinkItems = document.querySelectorAll('.nav-links li');
+      
+      burger.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-active');
+        navLinkItems.forEach((link, index) => {
+          if (link.style.animation) {
+            link.style.animation = '';
+          } else {
+            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+          }
+        });
+        burger.classList.toggle('toggle');
+      });
+      
+      // Allow burger menu toggle via keyboard (Enter key)
+      burger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          burger.click();
+        }
+      });
+      
+      // Smooth Scrolling for Navigation Links
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = item.getAttribute('href').substring(1);
+          const targetSection = document.getElementById(targetId);
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+          
+          if (navLinks.classList.contains('nav-active')) {
+            navLinks.classList.remove('nav-active');
+            burger.classList.remove('toggle');
+            navLinkItems.forEach(link => {
+              link.style.animation = '';
+            });
+          }
+        });
+      });
+      
+      // Change Navbar Background on Scroll
+      window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+      
+      // EmailJS Form Submission Handling
+      const form = document.getElementById('contact-form');
+      const message = document.getElementById('form-message');
+      
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          console.log("📨 Form submitted, preparing to send...");
+          const { serviceID, templateID } = window.config.emailjs;
+          emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+              console.log("✅ Email sent successfully!");
+              message.style.display = 'block';
+              message.style.color = '#4CAF50';
+              message.textContent = "Thank you! Your message has been sent.";
+              form.reset();
+            })
+            .catch(err => {
+              console.error("❌ EmailJS error:", err);
+              message.style.display = 'block';
+              message.style.color = '#f44336';
+              message.textContent = "Oops! There was a problem submitting your form.";
+            });
+        });
+      } else {
+        console.error("❌ Contact form not found!");
+      }
+      
+      // Intersection Observer for On-Scroll Animations
+      const animatedElements = document.querySelectorAll(
+        ".hero h1, .hero p, .btn-primary, " +
+        "#about h2, #about p, " +
+        "#projects h2, .project-card h3, .project-card p, .btn-secondary, " +
+        "#skills h2, .skill-card h3, .skill-card p, " +
+        "#contact h2, .contact-form button, " +
+        "#donation h2"
+      );
+      
+      animatedElements.forEach(elem => {
+        elem.style.opacity = 0;
+        elem.style.animation = "none";
+      });
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = "fadeInUp 1.2s ease-out forwards";
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      
+      animatedElements.forEach(elem => {
+        observer.observe(elem);
+      });
+      
+      // Initialize Lazy Load for Images
+      const lazyLoadInstance = new LazyLoad({
+        elements_selector: "img[loading='lazy']"
+      });
+    };
+  </script>
+</body>
+</html>
