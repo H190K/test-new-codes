@@ -711,7 +711,32 @@
   
   <!-- Import Config -->
  <script type="module">
-  
+  import projects from './projects.js';       // <— NEW
+  import config from './config.js';
+  import turnstileConfig from './turnstile.js';
+
+  window.config = config;
+  window.turnstileConfig = turnstileConfig;
+
+  /* ---------- render project cards ---------- */
+  const grid = document.getElementById('projects-grid');
+  projects.forEach(p => {
+    grid.insertAdjacentHTML('beforeend', `
+      <div class="project-card">
+        <a href="${p.link}" target="_blank">
+          <img src="${p.img}" alt="${p.title}" loading="lazy">
+        </a>
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <button class="btn-secondary"
+                onclick="window.open('${p.link}', '_blank')">
+          ${p.button || 'View Project'}
+        </button>
+      </div>
+    `);
+  });
+</script>
+
   <!-- JavaScript for Interactive Elements -->
   <script>
     window.onload = function () {
