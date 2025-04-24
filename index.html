@@ -152,10 +152,15 @@ main section:nth-of-type(even){ background:var(--secondary-bg); }
 }
 .project-card:hover{ transform:translateY(-10px); border-color:var(--hover-accent); }
 
-.project-card img{
-  width:100%; height:200px; object-fit:cover; transition:filter var(--transition-speed);
-  display:block;                       /* NEW remove tiny gap   */
+.project-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* NEW: browser sets correct height */
+  height: auto;           /* NEW: override old fixed value   */
+  object-fit: cover;
+  transition: filter var(--transition-speed) ease;
+  display: block;
 }
+
 .project-card:hover img{ filter:grayscale(0%); }
 
 .project-card h3,
