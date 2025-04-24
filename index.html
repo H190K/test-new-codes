@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,6 +17,9 @@
   
   <!-- Lazy Load Library -->
   <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
+  
+  <!-- Cloudflare Turnstile (anti-spam) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   
   <style>
     /* CSS Variables for easy theming */
@@ -725,6 +728,8 @@
             <input type="email" id="from_email" name="from_email" placeholder="Your Email" required>
             <label for="message">Your Message</label>
             <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+            <!-- Turnstile widget -->
+  <div id="turnstile-widget" class="cf-turnstile" data-theme="dark"></div>
             <button type="submit">Send Message</button>
             <p id="form-message" style="display: none;"></p>
           </form>
@@ -767,7 +772,9 @@
   <!-- Import Config -->
   <script type="module">
     import config from './config.js';
+    import turnstileConfig from './turnstile.js';
     window.config = config;
+     window.turnstileConfig = turnstileConfig; 
   </script>
   
   <!-- JavaScript for Interactive Elements -->
@@ -780,6 +787,13 @@
       } else {
         console.error("❌ EmailJS config is missing!");
       }
+      /* --- NEW: Render Cloudflare Turnstile --- */
+if (window.turnstile && window.turnstileConfig) {
+  turnstile.render('#turnstile-widget', {
+    sitekey: window.turnstileConfig.siteKey
+  });
+  console.log("✅ Turnstile initialized");
+}
       
       // Burger Menu Toggle
       const burger = document.querySelector('.burger');
